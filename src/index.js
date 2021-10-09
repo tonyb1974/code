@@ -44,6 +44,7 @@ export default class CodeTool {
   /**
    * @typedef {object} CodeData — plugin saved data
    * @property {string} code - previously saved plugin code
+   * @property {string} selectedLanguage - previously saved plugin language selection
    */
 
   /**
@@ -103,8 +104,6 @@ export default class CodeTool {
       'language-bash': {'name':'bash', 'prism': Prism.languages.bash},
     };
 
-    this.selectedLanguage = 'language-markup'; //default
-
     this.nodes = {
       holder: null,
       textarea: null,
@@ -114,6 +113,7 @@ export default class CodeTool {
 
     this.data = {
       code: data.code || '',
+      selectedLanguage: data.selectedLanguage || 'language-markup', //default
     };
 
     this.nodes.holder = this.drawView();
@@ -140,7 +140,7 @@ export default class CodeTool {
       innerCode.classList.add(this.CSS.code);
       innerCode.classList.add(this.CSS.input);
       innerCode.classList.add(this.CSS.codeblock);
-      innerCode.classList.add('language-html');
+      innerCode.classList.add('language-' + this.languages[this.data.selectedLanguage].name);
 
     if (this.readOnly) {
       textarea.disabled = true;
@@ -148,7 +148,6 @@ export default class CodeTool {
 
     } else {
         pre.classList.add('invisible');
-
     }
       wrapper.appendChild(pre);
       wrapper.appendChild(textarea);
@@ -185,11 +184,9 @@ export default class CodeTool {
               this.nodes.textarea.classList.add('invisible');
               this.nodes.code.classList.remove('invisible');
               this.nodes.innerCode.classList.add('line-numbers');
-              //alert(this.nodes.textarea.value);
-              //alert(this.nodes.innerCode.innerHTML);
             this.nodes.innerCode.innerHTML =
               Prism.highlight(this.nodes.textarea.value,
-                this.languages[this.selectedLanguage].prism, this.languages[this.selectedLanguage].name);
+                this.languages[this.data.selectedLanguage].prism, this.languages[this.data.selectedLanguage].name);
             }
         });
         if (this.readOnly) {
@@ -239,10 +236,12 @@ export default class CodeTool {
       languageSelectMenu.appendChild(rust);
       languageSelectMenu.appendChild(bash);
       languageSelectMenu.addEventListener('change', () => {
-        this.selectedLanguage = languageSelectMenu.value;
+        this.nodes.innerCode.classList.remove('language-' + this.languages[this.data.selectedLanguage].name);
+        this.data.selectedLanguage = languageSelectMenu.value;
         this.nodes.innerCode.innerHTML =
           Prism.highlight(this.nodes.textarea.value,
-            this.languages[this.selectedLanguage].prism, this.languages[this.selectedLanguage].name);
+            this.languages[this.data.selectedLanguage].prism, this.languages[this.data.selectedLanguage].name);
+        this.nodes.innerCode.classList.add('language-' + this.languages[this.data.selectedLanguage].name);
       });
       holder.appendChild(languageSelectMenu);
 
@@ -272,6 +271,7 @@ export default class CodeTool {
   save(codeWrapper) {
     return {
       code: codeWrapper.querySelector('textarea').value,
+      selectedLanguage: this.data.selectedLanguage,
     };
   }
 
