@@ -1,14 +1,35 @@
 .ce-code__textarea {
     min-height: 200px;
-    font-family: Menlo, Monaco, Consolas, Courier New, monospace;
-    color: #41314e;
+    color: lightgray;
+    background-color: black;
     line-height: 1.6em;
-    font-size: 12px;
-    background: #f8f7fa;
     border: 1px solid #f1f1f4;
     box-shadow: none;
     white-space: pre;
     word-wrap: normal;
     overflow-x: auto;
     resize: vertical;
+    font-size: 12px;
+    border-left: solid 6px #4a80b3;
+}
+
+.ce-code__visublock {
+    width: 100%;
+    display: inline-block;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    color: lightgray !important;
+    text-shadow: none !important;
+}
+
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+    color: #f28809 !important;
+    background: inherit !important;
+}
+
+::selection {
+    background-color: gray;
 }
