@@ -33,3 +33,7 @@ code[class*="language-"], pre[class*="language-"] {
 ::selection {
     background-color: gray;
 }
+
+.token {
+    z-index: 0!important;
+}

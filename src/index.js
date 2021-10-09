@@ -171,6 +171,7 @@ export default class CodeTool {
 
     renderSettings() {
         const holder = document.createElement('div');
+        holder.style.zIndex=200000;
         const modeSelectButton = document.createElement('span');
         modeSelectButton.addEventListener('click', () => {
           if (this.readOnly) {
@@ -235,6 +236,7 @@ export default class CodeTool {
       languageSelectMenu.appendChild(php);
       languageSelectMenu.appendChild(rust);
       languageSelectMenu.appendChild(bash);
+      languageSelectMenu.value = this.data.selectedLanguage;
       languageSelectMenu.addEventListener('change', () => {
         this.nodes.innerCode.classList.remove('language-' + this.languages[this.data.selectedLanguage].name);
         this.data.selectedLanguage = languageSelectMenu.value;
@@ -242,6 +244,7 @@ export default class CodeTool {
           Prism.highlight(this.nodes.textarea.value,
             this.languages[this.data.selectedLanguage].prism, this.languages[this.data.selectedLanguage].name);
         this.nodes.innerCode.classList.add('language-' + this.languages[this.data.selectedLanguage].name);
+        this.nodes.innerCode.style.zIndex=0;
       });
       holder.appendChild(languageSelectMenu);
 
