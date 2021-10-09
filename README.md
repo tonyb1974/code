@@ -6,6 +6,11 @@ Code Tool for the [Editor.js](https://ifmo.su/editor) allows to include code exa
 
 ![](https://capella.pics/8df022f5-b4d5-4d30-a527-2a0efb63f291.jpg)
 
+New features:
+
+ - A view/edit mode
+ - The view mode try to highligth your code with the language syntax you select from the settings menu (one of "java", "javascript", "css", "markup", "clike", "python", "rust", "go", "php", "bash", "scala" and "bash")
+
 ## Installation
 
 ### Install via NPM
@@ -25,7 +30,7 @@ const CodeTool = require('@editorjs/code');
 ### Download to your project's source dir
 
 1. Upload folder `dist` from repository
-2. Add `dist/bundle.js` file to your page.
+2. Add `dist/code.js` file to your page.
 
 ### Load from CDN
 
@@ -71,6 +76,7 @@ This Tool returns code.
     "type" : "code",
     "data" : {
         "code": "body {\n font-size: 14px;\n line-height: 16px;\n}",
+        "selectedLanguage": "language-css"
     }
 }
 ```

@@ -94,6 +94,7 @@ export default class CodeTool {
 
     this.languages = {
       'language-markup': {'name':'html', 'prism': Prism.languages.markup},
+      'language-css': {'name':'css', 'prism': Prism.languages.css},
       'language-java': {'name':'java', 'prism': Prism.languages.java},
       'language-javascript': {'name':'javascript', 'prism': Prism.languages.javascript},
       'language-cpp': {'name':'cpp', 'prism': Prism.languages.clike},
@@ -101,6 +102,7 @@ export default class CodeTool {
       'language-rust': {'name':'rust', 'prism': Prism.languages.rust},
       'language-python': {'name':'python', 'prism': Prism.languages.python},
       'language-php': {'name':'php', 'prism': Prism.languages.php},
+      'language-scala': {'name':'scala', 'prism': Prism.languages.scala},
       'language-bash': {'name':'bash', 'prism': Prism.languages.bash},
     };
 
@@ -203,6 +205,9 @@ export default class CodeTool {
       const html = document.createElement('option');
       html.value = 'language-markup';
       html.innerText = 'Html/Xml/MathML';
+      const css = document.createElement('option');
+      css.value = 'language-css';
+      css.innerText = 'Css';
       const java = document.createElement('option');
       java.value = 'language-java';
       java.innerText = 'Java';
@@ -224,10 +229,14 @@ export default class CodeTool {
       const rust = document.createElement('option');
       rust.value = 'language-rust';
       rust.innerText = 'Rust';
+      const scala = document.createElement('option');
+      scala.value = 'language-scala';
+      scala.innerText = 'Scala';
       const bash = document.createElement('option');
       bash.value = 'language-bash';
       bash.innerText = 'Bash';
       languageSelectMenu.appendChild(html);
+      languageSelectMenu.appendChild(css);
       languageSelectMenu.appendChild(java);
       languageSelectMenu.appendChild(javascript);
       languageSelectMenu.appendChild(go);
@@ -235,6 +244,7 @@ export default class CodeTool {
       languageSelectMenu.appendChild(python);
       languageSelectMenu.appendChild(php);
       languageSelectMenu.appendChild(rust);
+      languageSelectMenu.appendChild(scala);
       languageSelectMenu.appendChild(bash);
       languageSelectMenu.value = this.data.selectedLanguage;
       languageSelectMenu.addEventListener('change', () => {
